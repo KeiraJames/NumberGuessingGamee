@@ -1,0 +1,40 @@
+import javax.swing.*;
+import java.util.Random;
+public class NumberGuessingGame {
+    public static void main(String[] args) {
+        Random r =new Random();
+
+        int num = (r.nextInt(100) + 1);
+        System.out.println("The correct guess would be " + num);
+
+        int count = 1;
+        int userAnswer = 0;
+
+        while (userAnswer != num)
+        {
+            String response = JOptionPane.showInputDialog(null,
+                    "Guess a number between 1 and 100", "Guessing Game", 3);
+            userAnswer = Integer.parseInt(response);
+            JOptionPane.showMessageDialog(null, ""+ determineGuess(userAnswer, num, count));
+            count++;
+        }
+    }
+
+    public static String determineGuess(int userAnswer, int num, int count){
+        if (userAnswer <=0 || userAnswer >100) {
+            return "Your guess is invalid";
+        }
+        else if (userAnswer == num ){
+            return "Correct!\nTotal Guesses: " + count;
+        }
+        else if (userAnswer > num) {
+            return "Your guess is too high, try again.\nFail count: " + count;
+        }
+        else if (userAnswer < num) {
+            return "Your guess is too low, try again.\nFail count: " + count;
+        }
+        else {
+            return "Your guess is incorrect\nFail count: " + count;
+        }
+    }
+}
